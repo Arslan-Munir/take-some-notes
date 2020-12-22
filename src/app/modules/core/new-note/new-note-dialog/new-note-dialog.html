@@ -1,0 +1,45 @@
+
+<div>
+
+  <h2
+    class="lbl"
+    mat-dialog-title>New Note</h2>
+
+  <mat-dialog-content class="mat-typography">
+    <form
+      #noteForm="ngForm"
+      class="form">
+      <mat-form-field class="input-full-width">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          placeholder="Title"
+          type="text"
+          name="title"
+          [(ngModel)]="note.title"/>
+      </mat-form-field>
+
+      <mat-form-field class="input-full-width">
+        <mat-label>Details</mat-label>
+        <input
+          matInput
+          placeholder="Details"
+          type="text"
+          name="details"
+          [(ngModel)]="note.details"/>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="saveNote()">
+      Save
+    </button>
+  </mat-dialog-actions>
+
+  <spinner *ngIf="isBusy"></spinner>
+
+</div>
