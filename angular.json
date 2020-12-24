@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "take-notes"
+    }
+  },
+  "defaultProject": "take-notes",
+  "cli": {
+    "analytics": false
+  }
 }

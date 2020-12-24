@@ -1,18 +1,64 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {AccountComponent} from './modules/identity/components/account/account.component';
+import {FormsModule} from '@angular/forms';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {SpinnerComponent} from './modules/shared/components/spinner/spinner.component';
+import {HomeComponent} from './modules/core/home/home.component';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NewNoteComponent} from './modules/core/new-note/new-note.component';
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
+import {NewNoteDialog} from './modules/core/new-note/new-note-dialog/new-note-dialog';
+import {MatOptionModule} from '@angular/material/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSliderModule} from '@angular/material/slider';
+import { NotesComponent } from './modules/core/notes/notes.component';
+import { NoteComponent } from './modules/core/note/note.component';
+import {NgxMasonryModule} from 'ngx-masonry';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AccountComponent,
+    SpinnerComponent,
+    HomeComponent,
+    NewNoteComponent,
+    NewNoteDialog,
+    NotesComponent,
+    NoteComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    NgxMasonryModule,
+
+    MatDialogModule,
+    MatButtonModule,
+    MatOptionModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSliderModule,
+    AngularFireModule.initializeApp(environment.firebase),
   ],
-  providers: [],
+  entryComponents: [
+    NewNoteComponent,
+    NewNoteDialog
+  ],
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
+    // {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}}
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

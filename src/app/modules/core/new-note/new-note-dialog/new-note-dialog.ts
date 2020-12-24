@@ -1,22 +1,22 @@
 import {Component} from '@angular/core';
-import {Note} from '../../../shared/models/note.model';
+import {Note} from '../../../shared/models/note/note.model';
 import {ToastService} from '../../../shared/services/toast.service';
 import {NoteService} from '../../../shared/services/note.service';
 import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'new-note-dialog',
-  templateUrl: 'note-dialog.html',
-  styleUrls: ['note-dialog.scss']
+  templateUrl: 'new-note-dialog.html',
+  styleUrls: ['new-note-dialog.scss']
 })
-export class NoteDialog {
+export class NewNoteDialog {
 
   isBusy = false;
 
   note: Note = new Note();
 
   constructor(
-    private dialog: MatDialogRef<NoteDialog>,
+    private dialog: MatDialogRef<NewNoteDialog>,
     private noteService: NoteService,
     private toast: ToastService) {
   }

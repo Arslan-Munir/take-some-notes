@@ -1,0 +1,45 @@
+@import "src/styles/variables";
+
+.note {
+  border: 1px solid #d7d7d7;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: 0 0 2px #d7d7d7;
+  transition: box-shadow 0.3s ease-in-out;
+  padding: 10px;
+}
+
+@media (max-width: 992px) {
+  .title {
+    font-size: 15px;
+  }
+
+
+
+
+
+}
+
+@media screen and (max-width: 1204px) {
+  .title {
+    font-size: 1em;
+  }
+}
+
+.title {
+  margin: 10px 0;
+  font-weight: bold;
+  //font-size: 1vw;
+  flex-wrap: wrap;
+}
+
+.line {
+  border-bottom: 2px solid $base-color;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.details {
+  margin: 10px 0;
+  font-size: 1.1em;
+}

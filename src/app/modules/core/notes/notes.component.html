@@ -1,0 +1,28 @@
+<spinner *ngIf="isBusy"></spinner>
+
+<div
+  class="notes"
+  *ngIf="!isBusy">
+  <div *ngIf="notes.length<=0; then noNotes else notesList"></div>
+</div>
+
+<ng-template #noNotes>
+  <div
+    class="no-notes">
+    <p class="lbl">No notes found!</p>
+  </div>
+</ng-template>
+
+<ng-template #notesList>
+  <ngx-masonry>
+
+    <div
+      ngxMasonryItem
+      class="note"
+      *ngFor="let note of notes">
+
+      <note [note]="note"></note>
+    </div>
+
+  </ngx-masonry>
+</ng-template>

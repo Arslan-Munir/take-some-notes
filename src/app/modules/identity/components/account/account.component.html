@@ -1,0 +1,108 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <div *ngIf="isSignUp; then signUp else login"></div>
+
+      <spinner *ngIf="isBusy"></spinner>
+    </div>
+  </div>
+</div>
+
+<ng-template #login>
+  <form #loginForm="ngForm" class="login100-form">
+    <span class="login100-form-title p-b-26">
+      Take Some Notes
+    </span>
+
+    <div class="wrap-input100 validate-input">
+      <input
+        class="input100"
+        type="text"
+        placeholder="Email"
+        name="email"
+        [(ngModel)]="user.email">
+    </div>
+
+    <div class="wrap-input100 validate-input">
+      <input
+        class="input100"
+        type="password"
+        placeholder="Password"
+        name="pass"
+        [(ngModel)]="user.password">
+    </div>
+
+    <div class="container-btn">
+      <div class="wrap-btn">
+        <div class="bg-btn"></div>
+        <button
+          class="login100-form-btn"
+          type="submit"
+          (click)="userLogin()">
+          Login
+        </button>
+      </div>
+    </div>
+
+    <div class="text-center p-t-50">
+      <span class="txt1">
+        Don’t have an account?
+      </span>
+
+      <a
+        class="txt2"
+        (click)="toggleSignUp()">
+        Sign Up
+      </a>
+    </div>
+  </form>
+</ng-template>
+<ng-template #signUp>
+  <form #signUpForm="ngForm" class="login100-form">
+    <span class="login100-form-title p-b-26">
+      Take Some Notes
+    </span>
+
+    <div class="wrap-input100 validate-input">
+      <input
+        class="input100"
+        type="text"
+        name="email"
+        placeholder="Email"
+        [(ngModel)]="user.email">
+    </div>
+
+    <div class="wrap-input100 validate-input">
+      <input
+        class="input100"
+        type="password"
+        name="pass"
+        placeholder="Password"
+        [(ngModel)]="user.password">
+    </div>
+
+    <div class="container-btn">
+      <div class="wrap-btn">
+        <div class="bg-btn"></div>
+        <button
+          class="login100-form-btn"
+          type="submit"
+          (click)="userSignUp()">
+          Sign Up
+        </button>
+      </div>
+    </div>
+
+    <div class="text-center p-t-50">
+      <span class="txt1">
+        Already have an account?
+      </span>
+
+      <a
+        class="txt2"
+        (click)="toggleSignUp()">
+        Login
+      </a>
+    </div>
+  </form>
+</ng-template>

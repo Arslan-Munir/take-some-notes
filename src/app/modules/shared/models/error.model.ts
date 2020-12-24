@@ -1,4 +1,4 @@
-export class Errors {
+export class Error {
 
   private errors = new Map([
     ['auth/argument-error', 'Invalid credentials'],
