@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Note} from '../../../shared/models/note/note.model';
 import {ToastService} from '../../../shared/services/toast.service';
 import {NoteService} from '../../../shared/services/note.service';
@@ -21,6 +21,10 @@ export class NewNoteDialog {
     private toast: ToastService) {
   }
 
+  selectRed(id) {
+    // this.note.color = this.selectColor(id);
+  }
+
   saveNote() {
     if (!this.note.title && !this.note.details) {
       this.toast.error({errorMessage: 'Please write something to save.'});
@@ -35,5 +39,12 @@ export class NewNoteDialog {
       this.isBusy = false;
       this.toast.error({errorMessage: error});
     });
+  }
+
+  selectColor(id) {
+    const element = document.getElementById(id);
+    const style = window.getComputedStyle(element);
+    this.note.backgroundColor = style.getPropertyValue('background-color');
+    console.log(this.note.backgroundColor);
   }
 }

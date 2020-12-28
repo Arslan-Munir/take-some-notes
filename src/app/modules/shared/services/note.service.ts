@@ -19,7 +19,8 @@ export class NoteService {
     const user = this.storageService.getUser();
     return this.fireStore.collection('users').doc(user).collection('notes').add({
       title: note.title,
-      details: note.details
+      details: note.details,
+      backgroundColor: note.backgroundColor
     });
   }
 

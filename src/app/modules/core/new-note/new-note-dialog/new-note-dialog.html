@@ -1,4 +1,3 @@
-
 <div>
 
   <h2
@@ -28,6 +27,29 @@
           name="details"
           [(ngModel)]="note.details"/>
       </mat-form-field>
+
+      <span class="colors">
+          <span
+            id="red"
+            class="color red"
+            (click)="selectColor('red')"></span>
+          <span
+            id="light-green"
+            class="color light-green"
+            (click)="selectColor('light-green')"></span>
+          <span
+            id="light-yellow"
+            class="color light-yellow"
+            (click)="selectColor('light-yellow')"></span>
+          <span
+            id="blue"
+            class="color blue"
+            (click)="selectColor('blue')"></span>
+          <span
+            id="purple"
+            class="color purple"
+            (click)="selectColor('purple')"></span>
+        </span>
     </form>
   </mat-dialog-content>
 

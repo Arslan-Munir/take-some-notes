@@ -1,4 +1,6 @@
-<div class="note lbl">
+<div
+  [ngStyle]="{'background-color': note.backgroundColor}"
+  class="note lbl">
   <p class="title">{{note.title}}</p>
   <div
     *ngIf="note.details"

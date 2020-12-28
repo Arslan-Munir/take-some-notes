@@ -1,3 +1,5 @@
+@import "src/styles/variables";
+
 
 .form {
   min-width: 150px;
@@ -7,4 +9,40 @@
 
 .input-full-width {
   width: 100%;
+}
+
+.colors {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.color {
+  margin: 5px;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+}
+
+.color:hover {
+  cursor: pointer;
+}
+
+.red {
+  background-color: $base-color;
+}
+
+.light-green {
+  background-color: $light-green;
+}
+
+.light-yellow {
+  background-color: $light-yellow;
+}
+
+.purple {
+  background-color: $purple;
+}
+
+.blue {
+  background-color: $blue;
 }

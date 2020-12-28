@@ -21,7 +21,7 @@ export class NotesComponent implements OnInit {
       this.notes = notes;
       this.isBusy = false;
       console.log(this.notes);
-      // sub.unsubscribe();
+      sub.unsubscribe();
     });
   }
 
