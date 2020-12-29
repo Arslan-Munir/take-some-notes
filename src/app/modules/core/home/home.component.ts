@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
       .then(() => {
         this.storageService.removeUser();
         this.isUserLoggedIn = false;
-        this.route.navigateByUrl('account')
+        this.route.navigateByUrl('account');
       });
   }
 }

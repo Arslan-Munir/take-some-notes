@@ -1,7 +1,12 @@
-
 export class Note {
-  id: number;
+  id: string;
   title: string;
   details: string;
   backgroundColor: string;
+
+  constructor() {
+    this.title = '';
+    this.details = '';
+    this.backgroundColor = '';
+  }
 }

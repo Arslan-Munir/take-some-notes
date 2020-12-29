@@ -1,4 +1,4 @@
-@import "src/styles/variables";
+@import "../../../../styles/variables";
 
 
 .form {
@@ -28,7 +28,7 @@
 }
 
 .red {
-  background-color: $base-color;
+  background-color: $light-red;
 }
 
 .light-green {

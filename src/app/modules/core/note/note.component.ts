@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Note} from '../../shared/models/note/note.model';
+import {MatDialog} from '@angular/material/dialog';
+import {NoteDialogueComponent} from '../note-dialogue/note-dialogue.component';
 
 @Component({
   selector: 'note',
@@ -9,11 +11,17 @@ import {Note} from '../../shared/models/note/note.model';
 export class NoteComponent implements OnInit {
 
   @Input('note') note: Note;
+  noteDialogue = false;
 
-  constructor() {
-  }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  showNoteDialogue() {
+    this.noteDialogue = true;
+    const dialogRef = this.dialog.open(NoteDialogueComponent, {
+      data: this.note
+    });
+  }
 }

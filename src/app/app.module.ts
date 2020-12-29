@@ -11,8 +11,8 @@ import {HomeComponent} from './modules/core/home/home.component';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NewNoteComponent} from './modules/core/new-note/new-note.component';
-import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
-import {NewNoteDialog} from './modules/core/new-note/new-note-dialog/new-note-dialog';
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {NoteDialogueComponent} from './modules/core/note-dialogue/note-dialogue.component';
 import {MatOptionModule} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -29,7 +29,7 @@ import {NgxMasonryModule} from 'ngx-masonry';
     SpinnerComponent,
     HomeComponent,
     NewNoteComponent,
-    NewNoteDialog,
+    NoteDialogueComponent,
     NotesComponent,
     NoteComponent
   ],
@@ -51,9 +51,13 @@ import {NgxMasonryModule} from 'ngx-masonry';
   ],
   entryComponents: [
     NewNoteComponent,
-    NewNoteDialog
+    NoteDialogueComponent
   ],
   providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
     // {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}}
   ],
