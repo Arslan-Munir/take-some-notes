@@ -9,30 +9,33 @@
       #noteForm="ngForm"
       class="form">
       <mat-form-field class="input-full-width">
-        <mat-label>Title</mat-label>
+        <mat-label class="lbl">Title</mat-label>
         <input
           matInput
-          placeholder="Title"
+          class="lbl"
           type="text"
           name="title"
+          placeholder="Title"
           [(ngModel)]="note.title"/>
       </mat-form-field>
 
       <mat-form-field class="input-full-width">
-        <mat-label>Details</mat-label>
-        <input
+        <mat-label class="lbl">Details</mat-label>
+        <textarea
           matInput
-          placeholder="Details"
+          cdkTextareaAutosize
+          class="details lbl"
           type="text"
           name="details"
-          [(ngModel)]="note.details"/>
+          placeholder="Details"
+          [(ngModel)]="note.details"></textarea>
       </mat-form-field>
 
       <span class="colors">
           <span
-            id="red"
-            class="color red"
-            (click)="selectColor('red')"></span>
+            id="light-red"
+            class="color light-red"
+            (click)="selectColor('light-red')"></span>
           <span
             id="light-green"
             class="color light-green"

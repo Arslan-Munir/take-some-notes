@@ -25,26 +25,27 @@ export class NoteService {
 
   private add(note: Note): Promise<DocumentData> {
     const user = this.storageService.getUser();
-    return this.fireStore.collection('users').doc(user).collection('notes').add({
-      title: note.title,
-      details: note.details,
-      backgroundColor: note.backgroundColor
-    });
+    return this.fireStore.collection('users').doc(user).collection('notes').add(this.noteToSave(note));
   }
 
   private update(note: Note): Promise<void> {
     const user = this.storageService.getUser();
 
-    return this.fireStore.collection('users').doc(user).collection('notes').doc(note.id).update({
-      title: note.title,
-      details: note.details,
-      backgroundColor: note.backgroundColor
-    });
+    return this.fireStore.collection('users').doc(user).collection('notes').doc(note.id).update(this.noteToSave(note));
 
   }
 
   getNotes(): Observable<Note[]> {
     const user = this.storageService.getUser();
     return this.fireStore.collection('users').doc(user).collection<Note>('notes').valueChanges({idField: 'id'});
+  }
+
+  private noteToSave(note: Note): any {
+    return {
+      title: note.title,
+      details: note.details,
+      backgroundColor: note.backgroundColor,
+      colorIdentifier: note.colorIdentifier
+    };
   }
 }

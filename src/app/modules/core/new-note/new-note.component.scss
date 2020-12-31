@@ -1,12 +1,32 @@
+@import "src/styles/variables";
 
-.new{
+.options {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 0 30px 80px 0;
+  padding: 10px;
+  //visibility: hidden;
+}
+
+.new {
   position: fixed;
   bottom: 0;
   right: 0;
   margin: 25px;
 }
 
+.new:hover + .options {
+  visibility: visible;
+}
+
 .new-note {
   font-size: 25px;
   font-weight: bold;
 }
+
+.option:hover{
+  color: $base-color;
+  cursor: pointer;
+}
+

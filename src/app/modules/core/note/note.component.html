@@ -1,12 +1,14 @@
 <div
   [ngStyle]="{'background-color': note.backgroundColor}"
   class="note lbl"
-  (click)="showNoteDialogue()"
-  >
+  (click)="showNoteDialogue()">
+
   <p class="title">{{note.title}}</p>
+
   <div
     *ngIf="note.details"
     class="line"></div>
+
   <p class="details">{{note.details}}</p>
 </div>
 

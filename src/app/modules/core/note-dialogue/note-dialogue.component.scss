@@ -5,10 +5,22 @@
   min-width: 150px;
   max-width: 500px;
   width: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
 
 .input-full-width {
   width: 100%;
+}
+
+.details {
+  line-height: 2em;
+  overflow-y: scroll;
 }
 
 .colors {
@@ -21,15 +33,17 @@
   border-radius: 50%;
   width: 15px;
   height: 15px;
+  padding: 10px;
 }
 
 .color:hover {
   cursor: pointer;
 }
 
-.red {
+.light-red {
   background-color: $light-red;
 }
+
 
 .light-green {
   background-color: $light-green;

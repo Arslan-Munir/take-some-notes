@@ -21,6 +21,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import { NotesComponent } from './modules/core/notes/notes.component';
 import { NoteComponent } from './modules/core/note/note.component';
 import {NgxMasonryModule} from 'ngx-masonry';
+import {LabelDialogueComponent} from './modules/core/label-dialogue/label-dialogue.component';
+import {LabelsComponent} from './modules/core/labels/labels.component';
 
 @NgModule({
   declarations: [
@@ -29,9 +31,11 @@ import {NgxMasonryModule} from 'ngx-masonry';
     SpinnerComponent,
     HomeComponent,
     NewNoteComponent,
-    NoteDialogueComponent,
     NotesComponent,
-    NoteComponent
+    LabelsComponent,
+    NoteComponent,
+    NoteDialogueComponent,
+    LabelDialogueComponent
   ],
   imports: [
     FormsModule,

@@ -12,6 +12,9 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class NoteDialogueComponent implements OnInit {
 
   isBusy = false;
+  noteBackgroundColor: string;
+  previousSelectedColor: string;
+  colorRing = 'box-shadow: inset 0 0 0 0.15em #828282';
 
   note: Note;
 
@@ -20,20 +23,21 @@ export class NoteDialogueComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dialogueNote: Note,
     private noteService: NoteService,
     private toast: ToastService) {
-
-
   }
 
   ngOnInit(): void {
 
     if (this.dialogueNote) {
       this.note = this.dialogueNote;
+      if (this.dialogueNote.colorIdentifier) {
+        this.previousSelectedColor = this.dialogueNote.colorIdentifier;
+        const element = document.getElementById(this.dialogueNote.colorIdentifier);
+        element.style.cssText = this.colorRing;
+      }
     } else {
       this.note = new Note();
     }
-    console.log(this.note);
   }
-
 
   saveNote() {
     if (!this.note.title && !this.note.details) {
@@ -42,6 +46,8 @@ export class NoteDialogueComponent implements OnInit {
     }
 
     this.isBusy = true;
+
+    this.note.backgroundColor = this.noteBackgroundColor;
     this.noteService.save(this.note).then((res) => {
       this.isBusy = false;
       this.dialog.close();
@@ -51,10 +57,18 @@ export class NoteDialogueComponent implements OnInit {
     });
   }
 
-  selectColor(id) {
-    const element = document.getElementById(id);
+  selectColor(colorIdentifier) {
+    const element = document.getElementById(colorIdentifier);
     const style = window.getComputedStyle(element);
-    this.note.backgroundColor = style.getPropertyValue('background-color');
-    console.log(this.note.backgroundColor);
+    this.noteBackgroundColor = style.getPropertyValue('background-color');
+    this.note.colorIdentifier = colorIdentifier;
+
+    if (this.previousSelectedColor) {
+      const previousElement = document.getElementById(this.previousSelectedColor);
+      previousElement.style.removeProperty('box-shadow');
+    }
+
+    this.previousSelectedColor = colorIdentifier;
+    element.style.cssText = this.colorRing;
   }
 }
