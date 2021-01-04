@@ -12,8 +12,8 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class NoteDialogueComponent implements OnInit {
 
   isBusy = false;
-  noteBackgroundColor: string;
-  previousSelectedColor: string;
+  noteBackgroundColor = '';
+  previousSelectedColor = '';
   colorRing = 'box-shadow: inset 0 0 0 0.15em #828282';
 
   note: Note;

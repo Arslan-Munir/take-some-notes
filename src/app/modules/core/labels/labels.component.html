@@ -1,11 +1,19 @@
-<div class="labels">
+<div>
 
-  <div class="new-label">
-    <p>New Label</p>
+  <div
+    class="new-label"
+    (click)="openLabelDialog()">
+    <span class="btn-details">
+      <span class="add">+</span>
+      <span>
+        New Label
+      </span>
+    </span>
   </div>
 
   <ul *ngFor="let label of labels">
-    <li
-      class="label">{{label.title}}</li>
+    <li class="label">
+      <p>{{label.title}}</p>
+    </li>
   </ul>
 </div>

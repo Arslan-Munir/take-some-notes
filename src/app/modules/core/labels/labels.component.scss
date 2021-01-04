@@ -1,14 +1,39 @@
-.labels{
-  margin: 10px;
-}
+@import "src/styles/variables";
 
-.new-label{
-  border: 1px solid red;
-}
-
-.label {
-  border: 1px solid black;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+.new-label, .label {
+  font-weight: bold;
+  font-size: calc(0.5em + 1vmin);
+  text-align: center;
   padding: 5%;
+  margin: 5% 0 5% 0;
+  border: 2px solid $base-color;
+  border-radius: 25px;
+  letter-spacing: 2px;
 }
+
+
+.new-label {
+  background-color: $base-color;
+}
+
+.new-label > span {
+  color: $light-primary-text;
+}
+
+.new-label > span, li > p {
+  font-size: calc(0.5em + 1vmin);
+}
+
+.new-label:hover, .label:hover {
+  cursor: pointer;
+}
+
+.btn-details {
+  display: flex;
+  justify-content: center;
+}
+
+.add {
+  margin-right: 5%;
+}
+

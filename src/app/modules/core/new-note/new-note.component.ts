@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {NoteDialogueComponent} from '../note-dialogue/note-dialogue.component';
-import {LabelDialogueComponent} from '../label-dialogue/label-dialogue.component';
 
 @Component({
   selector: 'new-note',
@@ -17,10 +16,6 @@ export class NewNoteComponent implements OnInit {
   }
 
   openNoteDialog() {
-    const dialogRef = this.dialog.open(NoteDialogueComponent);
-  }
-
-  openLabelDialog() {
-    const dialogRef = this.dialog.open(LabelDialogueComponent);
+    this.dialog.open(NoteDialogueComponent);
   }
 }

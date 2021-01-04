@@ -9,18 +9,31 @@ import {Observable} from 'rxjs';
 })
 export class NoteService {
 
-  private notes = new Array<Note>();
+  public notes = new Observable<Note[]>();
 
   constructor(private fireStore: AngularFirestore,
               private storageService: StorageService) {
+
+    this.notes = this.getUserNotes();
   }
 
   save(note: Note): Promise<any> {
+    let result: any;
+
     if (!note.id) {
-      return this.add(note);
+      result = this.add(note);
+
+    } else {
+      result = this.update(note);
     }
 
-    return this.update(note);
+    this.notes = this.getUserNotes();
+    return result;
+  }
+
+  private getUserNotes(): Observable<Note[]> {
+    const user = this.storageService.getUser();
+    return this.fireStore.collection('users').doc(user).collection<Note>('notes').valueChanges({idField: 'id'});
   }
 
   private add(note: Note): Promise<DocumentData> {
@@ -33,11 +46,6 @@ export class NoteService {
 
     return this.fireStore.collection('users').doc(user).collection('notes').doc(note.id).update(this.noteToSave(note));
 
-  }
-
-  getNotes(): Observable<Note[]> {
-    const user = this.storageService.getUser();
-    return this.fireStore.collection('users').doc(user).collection<Note>('notes').valueChanges({idField: 'id'});
   }
 
   private noteToSave(note: Note): any {

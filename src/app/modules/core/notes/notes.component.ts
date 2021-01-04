@@ -17,10 +17,9 @@ export class NotesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const sub = this.noteService.getNotes().subscribe((notes) => {
+    const sub = this.noteService.notes.subscribe((notes) => {
       this.notes = notes;
       this.isBusy = false;
-      console.log(this.notes);
       sub.unsubscribe();
     });
   }

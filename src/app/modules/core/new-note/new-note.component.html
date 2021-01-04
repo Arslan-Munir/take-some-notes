@@ -1,22 +1,12 @@
-<div class="options">
-  <ul>
-    <li
-      class="option"
-      (click)="openNoteDialog()">Note</li>
-    <li
-      class="option"
-      (click)="openLabelDialog()">Label</li>
-  </ul>
-</div>
 
 <div class="new">
   <div class="container-btn">
     <div class="wrap-btn">
       <div class="bg-btn"></div>
       <button
-        class="btn new-note"
+        class="btn"
         type="submit"
-        >
+        (click)="openNoteDialog()">
         +
       </button>
     </div>
