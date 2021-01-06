@@ -12,7 +12,9 @@
   </div>
 
   <ul *ngFor="let label of labels">
-    <li class="label">
+    <li
+      class="label"
+      (click)="openLabelDialog(label)">
       <p>{{label.title}}</p>
     </li>
   </ul>

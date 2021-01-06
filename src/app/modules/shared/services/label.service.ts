@@ -9,8 +9,6 @@ import {Label} from '../models/label/label.model';
 })
 export class LabelService {
 
-  private label = new Array<Label>();
-
   constructor(private fireStore: AngularFirestore,
               private storageService: StorageService) {
   }
@@ -23,6 +21,11 @@ export class LabelService {
     return this.update(label);
   }
 
+  getLabels(): Observable<Label[]> {
+    const user = this.storageService.getUser();
+    return this.fireStore.collection('users').doc(user).collection<Label>('labels').valueChanges({idField: 'id'});
+  }
+
   private add(label: Label): Promise<DocumentData> {
     const user = this.storageService.getUser();
     return this.fireStore.collection('users').doc(user).collection('labels').add(this.labelToSave(label));
@@ -33,11 +36,6 @@ export class LabelService {
 
     return this.fireStore.collection('users').doc(user).collection('labels').doc(label.id).update(this.labelToSave(label));
 
-  }
-
-  getLabels(): Observable<Label[]> {
-    const user = this.storageService.getUser();
-    return this.fireStore.collection('users').doc(user).collection<Label>('labels').valueChanges({idField: 'id'});
   }
 
   private labelToSave(label: Label): any {

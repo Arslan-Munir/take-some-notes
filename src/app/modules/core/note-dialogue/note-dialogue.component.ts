@@ -3,6 +3,11 @@ import {Note} from '../../shared/models/note/note.model';
 import {ToastService} from '../../shared/services/toast.service';
 import {NoteService} from '../../shared/services/note.service';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Observable} from 'rxjs';
+import {Label} from '../../shared/models/label/label.model';
+import {LabelService} from '../../shared/services/label.service';
+import {FormControl} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'note-dialogue',
@@ -16,12 +21,16 @@ export class NoteDialogueComponent implements OnInit {
   previousSelectedColor = '';
   colorRing = 'box-shadow: inset 0 0 0 0.15em #828282';
 
-  note: Note;
+  note: Note = new Note();
+  labels: Label[];
+  labelControl = new FormControl();
+  filteredLabels: Observable<Label[]>;
 
   constructor(
     private dialog: MatDialogRef<NoteDialogueComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogueNote: Note,
     private noteService: NoteService,
+    private labelService: LabelService,
     private toast: ToastService) {
   }
 
@@ -34,9 +43,20 @@ export class NoteDialogueComponent implements OnInit {
         const element = document.getElementById(this.dialogueNote.colorIdentifier);
         element.style.cssText = this.colorRing;
       }
-    } else {
-      this.note = new Note();
     }
+
+    this.labelService.getLabels()
+      .subscribe((labels) => {
+        this.labels = labels;
+
+        this.filteredLabels = this.labelControl.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filter(value))
+          );
+      });
+
+
   }
 
   saveNote() {
@@ -70,5 +90,11 @@ export class NoteDialogueComponent implements OnInit {
 
     this.previousSelectedColor = colorIdentifier;
     element.style.cssText = this.colorRing;
+  }
+
+  private _filter(value: string): Label[] {
+    const filterValue = value.toLowerCase();
+
+    return this.labels.filter(option => option.title.toLowerCase().includes(filterValue));
   }
 }

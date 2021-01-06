@@ -27,11 +27,11 @@ export class NoteService {
       result = this.update(note);
     }
 
-    this.notes = this.getUserNotes();
+    // this.notes = this.getUserNotes();
     return result;
   }
 
-  private getUserNotes(): Observable<Note[]> {
+  getUserNotes(): Observable<Note[]> {
     const user = this.storageService.getUser();
     return this.fireStore.collection('users').doc(user).collection<Note>('notes').valueChanges({idField: 'id'});
   }

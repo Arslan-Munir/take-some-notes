@@ -22,12 +22,14 @@ export class LabelsComponent implements OnInit {
     const sub = this.labelService.getLabels().subscribe((labels) => {
       this.labels = labels;
       this.isBusy = false;
-      sub.unsubscribe();
+      // sub.unsubscribe();
     });
   }
 
-  openLabelDialog() {
-    this.dialog.open(LabelDialogueComponent);
+  openLabelDialog(label?: Label) {
+    this.dialog.open(LabelDialogueComponent, {
+      data: label
+    });
   }
 
 }

@@ -1,7 +1,6 @@
 <spinner *ngIf="isBusy"></spinner>
 
 <div
-  class="notes"
   *ngIf="!isBusy">
   <div *ngIf="notes.length<=0; then noNotes else notesList"></div>
 </div>
@@ -14,11 +13,12 @@
 </ng-template>
 
 <ng-template #notesList>
-  <ngx-masonry>
-
+  <ngx-masonry
+    class="notes"
+    (layoutComplete)="reset($event)">
     <div
-      ngxMasonryItem
       class="note"
+      ngxMasonryItem
       *ngFor="let note of notes">
 
       <note [note]="note"></note>

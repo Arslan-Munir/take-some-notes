@@ -3,7 +3,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AccountComponent} from './modules/identity/components/account/account.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {SpinnerComponent} from './modules/shared/components/spinner/spinner.component';
@@ -23,6 +23,7 @@ import { NoteComponent } from './modules/core/note/note.component';
 import {NgxMasonryModule} from 'ngx-masonry';
 import {LabelDialogueComponent} from './modules/core/label-dialogue/label-dialogue.component';
 import {LabelsComponent} from './modules/core/labels/labels.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,10 @@ import {LabelsComponent} from './modules/core/labels/labels.component';
     MatInputModule,
     MatFormFieldModule,
     MatSliderModule,
+    MatAutocompleteModule,
+
     AngularFireModule.initializeApp(environment.firebase),
+    ReactiveFormsModule,
   ],
   entryComponents: [
     NewNoteComponent,

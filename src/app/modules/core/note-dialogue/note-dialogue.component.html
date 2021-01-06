@@ -31,6 +31,21 @@
           [(ngModel)]="note.details"></textarea>
       </mat-form-field>
 
+      <mat-form-field class="input-full-width">
+        <input type="text"
+               placeholder="Assign label"
+               aria-label="Number"
+               matInput
+               [formControl]="labelControl"
+               [matAutocomplete]="auto" />
+
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let label of filteredLabels | async" [value]="label.title">
+            {{label.title}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
       <span class="colors">
           <span
             id="light-red"

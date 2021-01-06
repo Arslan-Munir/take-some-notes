@@ -1,6 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NoteService} from '../../shared/services/note.service';
 import {Note} from '../../shared/models/note/note.model';
+import {NgxMasonryComponent} from 'ngx-masonry';
+import {LabelService} from '../../shared/services/label.service';
+import {Observable} from 'rxjs';
+import {Label} from '../../shared/models/label/label.model';
 
 @Component({
   selector: 'notes',
@@ -10,18 +14,27 @@ import {Note} from '../../shared/models/note/note.model';
 export class NotesComponent implements OnInit {
 
   notes = new Array<Note>();
+
   isBusy = true;
+
+  @ViewChild(NgxMasonryComponent) masonry: NgxMasonryComponent;
 
   constructor(private noteService: NoteService) {
 
   }
 
   ngOnInit(): void {
-    const sub = this.noteService.notes.subscribe((notes) => {
+
+    this.noteService.getUserNotes().subscribe((notes) => {
       this.notes = notes;
       this.isBusy = false;
-      sub.unsubscribe();
     });
   }
 
+  reset() {
+    this.isBusy = true;
+    this.masonry.reloadItems();
+    this.masonry.layout();
+    this.isBusy = false;
+  }
 }

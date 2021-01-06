@@ -18,9 +18,9 @@ export class NoteComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showNoteDialogue() {
+  openNoteDialogue() {
     this.noteDialogue = true;
-    const dialogRef = this.dialog.open(NoteDialogueComponent, {
+    this.dialog.open(NoteDialogueComponent, {
       data: this.note
     });
   }
