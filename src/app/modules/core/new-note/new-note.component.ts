@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {NoteDialogueComponent} from '../note-dialogue/note-dialogue.component';
+import {NoteDialogueComponent} from '../note/note-dialogue/note-dialogue.component';
 
 @Component({
   selector: 'new-note',

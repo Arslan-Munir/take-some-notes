@@ -3,15 +3,28 @@
   class="note lbl"
   (click)="openNoteDialogue()">
 
-  <p class="title">{{note.title}}</p>
+  <div>
+    <mat-icon
+      class="delete-icon"
+      (click)="delete()">delete
+    </mat-icon>
+
+    <p class="title">{{note.title}}</p>
+  </div>
 
   <div
     *ngIf="note.details"
     class="line"></div>
 
   <p class="details">{{note.details}}</p>
+
+  <div class="labels">
+    <span
+      class="label lbl"
+      *ngFor="let label of note.labels">
+      {{label}}
+    </span>
+  </div>
 </div>
 
-<!--<note-dialogue-->
-<!--  *ngIf="noteDialogue"-->
-<!--  [note]="note"></note-dialogue>-->
+

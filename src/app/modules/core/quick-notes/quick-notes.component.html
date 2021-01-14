@@ -1,0 +1,21 @@
+<div>
+
+  <div
+    class="new-quick-note"
+    (click)="openQuickNoteDialog()">
+    <span class="btn-details">
+      <span class="add">+</span>
+      <span>
+        Quick Note
+      </span>
+    </span>
+  </div>
+
+  <ul *ngFor="let quickNote of quickNotes">
+    <li
+      class="quick-note"
+      (click)="openQuickNoteDialog(quickNote)">
+      <p>{{quickNote.details}}</p>
+    </li>
+  </ul>
+</div>

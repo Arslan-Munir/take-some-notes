@@ -1,6 +1,6 @@
 @import "src/styles/variables";
 
-.new-label, .label {
+.new-quick-note, .quick-note {
   font-weight: bold;
   font-size: calc(0.5em + 1vmin);
   text-align: center;
@@ -12,19 +12,19 @@
 }
 
 
-.new-label {
+.new-quick-note {
   background-color: $base-color;
 }
 
-.new-label > span {
+.new-quick-note > span {
   color: $light-primary-text;
 }
 
-.new-label > span, li > p {
+.new-quick-note > span, li > p {
   font-size: calc(0.5em + 1vmin);
 }
 
-.new-label:hover, .label:hover {
+.new-quick-note:hover, .quick-note:hover {
   cursor: pointer;
 }
 

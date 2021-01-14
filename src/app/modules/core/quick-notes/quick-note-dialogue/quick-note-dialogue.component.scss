@@ -1,0 +1,18 @@
+
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.details {
+  line-height: 2em;
+  overflow-y: scroll;
+}

@@ -2,21 +2,22 @@
 
   <h2
     class="lbl"
-    mat-dialog-title>New Label</h2>
+    mat-dialog-title>Quick Note</h2>
 
   <mat-dialog-content class="mat-typography">
     <form
       #noteForm="ngForm"
       class="form">
       <mat-form-field class="input-full-width">
-        <mat-label class="lbl">Title</mat-label>
-        <input
+        <mat-label class="lbl">Details</mat-label>
+        <textarea
           matInput
-          class="lbl"
+          cdkTextareaAutosize
+          class="details lbl"
           type="text"
           name="title"
           placeholder="Title"
-          [(ngModel)]="label.title"/>
+          [(ngModel)]="quickNote.details"></textarea>
       </mat-form-field>
     </form>
   </mat-dialog-content>

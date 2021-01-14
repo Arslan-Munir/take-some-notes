@@ -32,18 +32,20 @@
       </mat-form-field>
 
       <mat-form-field class="input-full-width">
-        <input type="text"
-               placeholder="Assign label"
-               aria-label="Number"
-               matInput
-               [formControl]="labelControl"
-               [matAutocomplete]="auto" />
+        <mat-label class="lbl">Assign Label</mat-label>
 
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let label of filteredLabels | async" [value]="label.title">
-            {{label.title}}
-          </mat-option>
-        </mat-autocomplete>
+        <mat-chip-list #chipList aria-label="lables">
+          <mat-chip *ngFor="let label of note.labels" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(label)">
+            {{label}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"/>
+        </mat-chip-list>
       </mat-form-field>
 
       <span class="colors">

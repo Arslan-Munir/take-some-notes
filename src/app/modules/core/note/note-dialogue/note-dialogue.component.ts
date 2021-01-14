@@ -1,13 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Note} from '../../shared/models/note/note.model';
-import {ToastService} from '../../shared/services/toast.service';
-import {NoteService} from '../../shared/services/note.service';
+import {Note} from '../../../shared/models/note/note.model';
+import {ToastService} from '../../../shared/services/toast.service';
+import {NoteService} from '../../../shared/services/note.service';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Observable} from 'rxjs';
-import {Label} from '../../shared/models/label/label.model';
-import {LabelService} from '../../shared/services/label.service';
-import {FormControl} from '@angular/forms';
-import {map, startWith} from 'rxjs/operators';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
 
 @Component({
   selector: 'note-dialogue',
@@ -20,17 +17,18 @@ export class NoteDialogueComponent implements OnInit {
   noteBackgroundColor = '';
   previousSelectedColor = '';
   colorRing = 'box-shadow: inset 0 0 0 0.15em #828282';
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
 
   note: Note = new Note();
-  labels: Label[];
-  labelControl = new FormControl();
-  filteredLabels: Observable<Label[]>;
 
   constructor(
     private dialog: MatDialogRef<NoteDialogueComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogueNote: Note,
     private noteService: NoteService,
-    private labelService: LabelService,
     private toast: ToastService) {
   }
 
@@ -44,20 +42,8 @@ export class NoteDialogueComponent implements OnInit {
         element.style.cssText = this.colorRing;
       }
     }
-
-    this.labelService.getLabels()
-      .subscribe((labels) => {
-        this.labels = labels;
-
-        this.filteredLabels = this.labelControl.valueChanges
-          .pipe(
-            startWith(''),
-            map(value => this._filter(value))
-          );
-      });
-
-
   }
+
 
   saveNote() {
     if (!this.note.title && !this.note.details) {
@@ -68,13 +54,36 @@ export class NoteDialogueComponent implements OnInit {
     this.isBusy = true;
 
     this.note.backgroundColor = this.noteBackgroundColor;
-    this.noteService.save(this.note).then((res) => {
+    this.noteService.save(this.note).then(() => {
       this.isBusy = false;
       this.dialog.close();
     }).catch((error) => {
       this.isBusy = false;
       this.toast.error({errorMessage: error});
     });
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.note.labels.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(label: string): void {
+    const index = this.note.labels.indexOf(label);
+
+    if (index >= 0) {
+      this.note.labels.splice(index, 1);
+    }
   }
 
   selectColor(colorIdentifier) {
@@ -90,11 +99,5 @@ export class NoteDialogueComponent implements OnInit {
 
     this.previousSelectedColor = colorIdentifier;
     element.style.cssText = this.colorRing;
-  }
-
-  private _filter(value: string): Label[] {
-    const filterValue = value.toLowerCase();
-
-    return this.labels.filter(option => option.title.toLowerCase().includes(filterValue));
   }
 }

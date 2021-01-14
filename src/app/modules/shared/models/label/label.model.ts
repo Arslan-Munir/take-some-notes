@@ -1,4 +1,4 @@
-export class Label {
+export class QuickNote {
   id: string;
-  title: string;
+  details: string;
 }

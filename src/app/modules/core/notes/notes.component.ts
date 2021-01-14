@@ -2,9 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NoteService} from '../../shared/services/note.service';
 import {Note} from '../../shared/models/note/note.model';
 import {NgxMasonryComponent} from 'ngx-masonry';
-import {LabelService} from '../../shared/services/label.service';
+import {QuickNoteService} from '../../shared/services/quick-note.service';
 import {Observable} from 'rxjs';
-import {Label} from '../../shared/models/label/label.model';
+import {QuickNote} from '../../shared/models/label/label.model';
 
 @Component({
   selector: 'notes',

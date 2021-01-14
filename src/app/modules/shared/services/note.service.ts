@@ -10,11 +10,13 @@ import {Observable} from 'rxjs';
 export class NoteService {
 
   public notes = new Observable<Note[]>();
+  private user;
 
   constructor(private fireStore: AngularFirestore,
               private storageService: StorageService) {
 
     this.notes = this.getUserNotes();
+    this.user = this.storageService.getUser();
   }
 
   save(note: Note): Promise<any> {
@@ -32,19 +34,23 @@ export class NoteService {
   }
 
   getUserNotes(): Observable<Note[]> {
-    const user = this.storageService.getUser();
-    return this.fireStore.collection('users').doc(user).collection<Note>('notes').valueChanges({idField: 'id'});
+    return this.fireStore.collection('users').doc(this.user).collection<Note>('notes').valueChanges({idField: 'id'});
+  }
+
+  delete(note: Note): Promise<void> {
+    return this.fireStore.collection('users')
+      .doc(this.user)
+      .collection('notes')
+      .doc(note.id)
+      .delete();
   }
 
   private add(note: Note): Promise<DocumentData> {
-    const user = this.storageService.getUser();
-    return this.fireStore.collection('users').doc(user).collection('notes').add(this.noteToSave(note));
+    return this.fireStore.collection('users').doc(this.user).collection('notes').add(this.noteToSave(note));
   }
 
   private update(note: Note): Promise<void> {
-    const user = this.storageService.getUser();
-
-    return this.fireStore.collection('users').doc(user).collection('notes').doc(note.id).update(this.noteToSave(note));
+    return this.fireStore.collection('users').doc(this.user).collection('notes').doc(note.id).update(this.noteToSave(note));
 
   }
 
@@ -53,7 +59,8 @@ export class NoteService {
       title: note.title,
       details: note.details,
       backgroundColor: note.backgroundColor,
-      colorIdentifier: note.colorIdentifier
+      colorIdentifier: note.colorIdentifier,
+      labels: note.labels
     };
   }
 }

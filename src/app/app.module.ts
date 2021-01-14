@@ -12,7 +12,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NewNoteComponent} from './modules/core/new-note/new-note.component';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {NoteDialogueComponent} from './modules/core/note-dialogue/note-dialogue.component';
+import {NoteDialogueComponent} from './modules/core/note/note-dialogue/note-dialogue.component';
 import {MatOptionModule} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -21,9 +21,11 @@ import {MatSliderModule} from '@angular/material/slider';
 import { NotesComponent } from './modules/core/notes/notes.component';
 import { NoteComponent } from './modules/core/note/note.component';
 import {NgxMasonryModule} from 'ngx-masonry';
-import {LabelDialogueComponent} from './modules/core/label-dialogue/label-dialogue.component';
-import {LabelsComponent} from './modules/core/labels/labels.component';
+import {QuickNoteDialogueComponent} from './modules/core/quick-notes/quick-note-dialogue/quick-note-dialogue.component';
+import {QuickNotesComponent} from './modules/core/quick-notes/quick-notes.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -33,10 +35,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     HomeComponent,
     NewNoteComponent,
     NotesComponent,
-    LabelsComponent,
+    QuickNotesComponent,
     NoteComponent,
     NoteDialogueComponent,
-    LabelDialogueComponent
+    QuickNoteDialogueComponent
   ],
   imports: [
     FormsModule,
@@ -53,6 +55,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatFormFieldModule,
     MatSliderModule,
     MatAutocompleteModule,
+    MatChipsModule,
+    MatIconModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     ReactiveFormsModule,

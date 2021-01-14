@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Note} from '../../shared/models/note/note.model';
 import {MatDialog} from '@angular/material/dialog';
-import {NoteDialogueComponent} from '../note-dialogue/note-dialogue.component';
+import {NoteDialogueComponent} from './note-dialogue/note-dialogue.component';
+import {NoteService} from '../../shared/services/note.service';
+import {ToastService} from '../../shared/services/toast.service';
 
 @Component({
   selector: 'note',
@@ -10,18 +12,37 @@ import {NoteDialogueComponent} from '../note-dialogue/note-dialogue.component';
 })
 export class NoteComponent implements OnInit {
 
-  @Input('note') note: Note;
-  noteDialogue = false;
+  isBusy = false;
+  noteDialogue = true;
 
-  constructor(private dialog: MatDialog) { }
+  @Input('note') note: Note;
+
+  constructor(private noteService: NoteService,
+              private dialog: MatDialog,
+              private toast: ToastService) {
+  }
 
   ngOnInit(): void {
   }
 
   openNoteDialogue() {
-    this.noteDialogue = true;
-    this.dialog.open(NoteDialogueComponent, {
-      data: this.note
+    if (this.noteDialogue) {
+      this.dialog.open(NoteDialogueComponent, {
+        data: this.note
+      });
+    }
+  }
+
+  delete() {
+    this.noteDialogue = false;
+    this.isBusy = true;
+
+    this.noteService.delete(this.note)
+      .then(() => {
+        this.isBusy = false;
+      }).catch((error) => {
+      this.isBusy = false;
+      this.toast.error({errorMessage: error});
     });
   }
 }
